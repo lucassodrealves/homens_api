@@ -10,18 +10,20 @@ class DbOperation
     {
   
         require_once dirname(__FILE__) . '/DbConnect.php';
- 
+ //Vindo Arquivo da Conectividade
      
         $db = new DbConnect();
+		//Colocada em Variável a Sessão do Arquivo requerido como nova Aqui
  
 
         $this->con = $db->connect();
+		//Colocada a Variável da Função igual a do Arquivo requerido dentro do Local de Conectividade 
     }
 	
 	
-	function createHero($name, $realname, $rating, $teamaffiliation){
-		$stmt = $this->con->prepare("INSERT INTO heroes (name, realname, rating, teamaffiliation) VALUES (?, ?, ?, ?)");
-		$stmt->bind_param("ssis", $name, $realname, $rating, $teamaffiliation);
+	function createHero($name, $realname, $rating, $teamaffiliation){//Parâmetros dentro da Função
+		$stmt = $this->con->prepare("INSERT INTO heroes (name, realname, rating, teamaffiliation) VALUES (?, ?, ?, ?)");//O "prepare" tem que reconhecer Valores como Viáveis.Values vão ser Inseridos por quem usa a Aplicação. Como "id" é auto_incremento sem necessidade e ocasião para citá-lo aqui
+		$stmt->bind_param("ssis", $name, $realname, $rating, $teamaffiliation);//bind_paragram:Organiza dados de Acordo com seus Tipos(i(de número);s(de escritos);b(de imagens).
 		if($stmt->execute())
 			return true; 			
 		return false;
@@ -64,5 +66,22 @@ class DbOperation
 		if($stmt->execute())
 			return true; 
 		return false; 
-	}
-}
+}}
+/*Treino
+
+$nome="Lucas";
+
+create table Pessoas(
+apelido varchar(10),
+nome varchar(50),
+primare key(nome));
+insert into Pessoas('Lulu','Lucas');
+
+O que aparece
+
+Lulu Lucas
+
+Sem ainda id Automático
+	
+	
+	
